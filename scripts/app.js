@@ -22,12 +22,34 @@ class Game {
     }
 
     start() {
-        let frame = () => {
+
+        let fps = 30,
+            interval = 1000 / fps,
+            delta = 0,
+            dt = 0;
+
+
+        let frame = (timestamp) => {
+            requestAnimationFrame(frame)
+
+            dt = timestamp - dt
+            
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+            if (delta > interval) {
+                 this.update()
+                 delta = 0
+            }
+           
             this.render()
+            delta = delta + dt
+            dt = timestamp
+
+
+            
         }
 
-        frame()
-        // requestAnimationFrame(frame)
+        
+        requestAnimationFrame(frame)
     }
 
 }
@@ -36,3 +58,4 @@ class Game {
 let game = new Game();
 
 console.log(game);
+
