@@ -59,8 +59,7 @@ class Game {
         
     }
 
-    start() {
-
+    start() {           
         let fps = 30,
             interval = 1000 / fps,
             delta = 0,
@@ -79,9 +78,7 @@ class Game {
             this.render(dt)
             delta = delta + dt
             dt = timestamp           
-        }
-
-        
+        }        
         requestAnimationFrame(frame)
     }
 

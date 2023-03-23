@@ -1,8 +1,10 @@
+import MenuScene from "./menu.js";
+
 export default class IntroScene {
     constructor(game) {
-        this.logoRevealTime = 200
-        this.textTypingTime = 200
-        this.sceneDisplayTime = 600
+        this.logoRevealTime = 2000
+        this.textTypingTime = 2000
+        this.sceneDisplayTime = 6000
 
         this.elapsedTime = 0;
         this.bigText = 'INTRO'
@@ -14,6 +16,10 @@ export default class IntroScene {
 
     update(dt) {
         this.elapsedTime += dt;
+
+        if (this.elapsedTime > this.sceneDisplayTime || this.game.checkKeyPress('Escape')) {
+            this.game.setScene(MenuScene);
+        }
     }
 
     render(dt, ctx, canvas) {
@@ -21,6 +27,7 @@ export default class IntroScene {
         ctx.fillRect(0, 0, canvas.width, canvas.height)
 
         ctx.globalAlpha = Math.min(1, this.elapsedTime / this.logoRevealTime)
+        
         ctx.font = '100px Helvetica'
         ctx.fillStyle = '#ffffff'
         ctx.fillText(this.bigText, (canvas.width - ctx.measureText(this.bigText).width) / 2, canvas.height / 2)
